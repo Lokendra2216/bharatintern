@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Temperature Converter</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+        #converter {
+            margin: 20px auto;
+            max-width: 400px;
+            padding: 20px;
+            border: 1px solid #ccc;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+        }
+    </style>
+</head>
+<body>
+    <div id="converter">
+        <h2>Temperature Converter</h2>
+        <input type="number" id="temperatureInput" placeholder="Enter temperature" step="any">
+        <select id="unitSelect">
+            <option value="celsius">Celsius</option>
+            <option value="fahrenheit">Fahrenheit</option>
+            <!-- Add option for Kelvin if you want -->
+        </select>
+        <button onclick="convertTemperature()">Convert</button>
+        <p id="result"></p>
+    </div>
+
+    <script>
+        function convertTemperature() {
+            const temperatureInput = parseFloat(document.getElementById('temperatureInput').value);
+            const unitSelect = document.getElementById('unitSelect');
+            const result = document.getElementById('result');
+
+            if (!isNaN(temperatureInput)) {
+                const selectedUnit = unitSelect.value;
+                let convertedTemperature;
+
+                if (selectedUnit === 'celsius') {
+                    // Convert to Fahrenheit
+                    convertedTemperature = (temperatureInput * 9/5) + 32;
+                    result.textContent = `${temperatureInput}°C is ${convertedTemperature.toFixed(2)}°F`;
+                } else if (selectedUnit === 'fahrenheit') {
+                    // Convert to Celsius
+                    convertedTemperature = (temperatureInput - 32) * 5/9;
+                    result.textContent = `${temperatureInput}°F is ${convertedTemperature.toFixed(2)}°C`;
+                }
+
+                // You can add more conditions for Kelvin conversion if needed
+
+            } else {
+                result.textContent = 'Please enter a valid temperature.';
+            }
+        }
+    </script>
+</body>
+</html>
